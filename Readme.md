@@ -1,5 +1,5 @@
 # App list
-- [ ] Nvim
+- [X] Nvim
 
 # Todo
 - [ ] Tmux
