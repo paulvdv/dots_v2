@@ -16,4 +16,3 @@ if not vim.g.vscode then
   require("keymap")
   require("lazy").setup("plugins")
 end
-
