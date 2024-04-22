@@ -9,10 +9,10 @@ return {
     config = function()
       local telescope = require("telescope")
       local telescopeConfig = require("telescope.config")
-      
+
       -- Clone the default Telescope configuration
       local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
-      
+
       -- search in hidden/dot files.
       table.insert(vimgrep_arguments, "--hidden")
       -- don't search in the `.git` directory.
