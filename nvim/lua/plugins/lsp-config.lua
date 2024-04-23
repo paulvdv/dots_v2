@@ -11,9 +11,7 @@ return {
     lazy = false,
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = {
-          "lua_ls"
-        }
+        ensure_installed = { "lua_ls" }
       })
     end
   },
@@ -25,13 +23,6 @@ return {
         -- Do not send telemetry data containing a randomized but unique identifier
         telemetry = {
           enable = false,
-        },
-
-        format = {
-          enable = true,
-          defaultConfig = {
-            indent_style = "tab",
-          },
         },
       })
 
