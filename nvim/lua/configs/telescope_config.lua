@@ -11,7 +11,7 @@ local options = {
       "--smart-case",
       "--hidden",
       "--glob",
-      "!**/.git/*"
+      "!**/.git/*",
     },
     initial_mode = "insert",
     selection_strategy = "reset",
@@ -59,8 +59,8 @@ local options = {
       case_mode = "smart_case",
     },
     ["ui-select"] = {
-      require("telescope.themes").get_dropdown({})
-    }
+      require("telescope.themes").get_dropdown({}),
+    },
   },
 }
 
