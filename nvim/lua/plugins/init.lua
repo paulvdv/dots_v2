@@ -13,6 +13,17 @@ return {
 
   -- Formatting
   {
+    "stevearc/conform.nvim",
+    event = "BufWritePre",
+    opts = function()
+      return require("configs.conform_config")
+    end,
+    config = function(_, opts)
+      require("conform").setup(opts)
+    end,
+  },
+
+  {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPost", "BufNewFile" },
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
@@ -54,7 +65,7 @@ return {
     },
     cmd = "Telescope",
     opts = function()
-      return require("configs.telescope")
+      return require("configs.telescope_config")
     end,
     config = function(_, opts)
       local telescope = require("telescope")
