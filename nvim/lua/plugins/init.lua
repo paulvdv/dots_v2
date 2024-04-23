@@ -60,14 +60,6 @@ return {
       local telescope = require("telescope")
       telescope.setup(opts)
 
-      local builtin = require("telescope.builtin")
-      local map = vim.keymap.set
-
-      map("n", "<C-p>", builtin.find_files, {})
-      map("n", "<leader>fg", builtin.live_grep, {})
-      map('n', '<leader>fb', builtin.buffers, {})
-      map("n", "<leader><leader>", builtin.oldfiles, {})
-
       -- load extensions
       for _, ext in ipairs(opts.extensions) do
         telescope.load_extension(ext)
