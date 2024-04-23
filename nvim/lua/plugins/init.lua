@@ -5,13 +5,25 @@ return {
     name = "catppuccin",
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme "catppuccin-mocha"
-    end
+      vim.cmd.colorscheme("catppuccin-mocha")
+    end,
   },
 
   "nvim-lua/plenary.nvim",
 
   -- Formatting
+  {
+    "stevearc/conform.nvim",
+    event = "BufWritePre",
+    cmd = { "ConformInfo" },
+    opts = function()
+      return require("configs.conform_config")
+    end,
+    config = function(_, opts)
+      require("conform").setup(opts)
+    end,
+  },
+
   {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPost", "BufNewFile" },
@@ -22,7 +34,7 @@ return {
     end,
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
-    end
+    end,
   },
 
   -- git
@@ -30,7 +42,7 @@ return {
     "tpope/vim-fugitive",
     cmd = {
       "Git",
-    }
+    },
   },
 
   {
@@ -41,10 +53,34 @@ return {
     end,
     config = function(_, opts)
       require("gitsigns").setup(opts)
-    end
+    end,
   },
 
-  -- Telescope 
+  {
+    "williamboman/mason.nvim",
+    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
+    config = function()
+      require("mason").setup()
+    end,
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    lazy = false,
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = { "lua_ls" },
+      })
+    end,
+  },
+  {
+    "neovim/nvim-lspconfig",
+    event = "User FilePost",
+    config = function()
+      require("configs.lspconf").defaults()
+    end,
+  },
+
+  -- Telescope
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
@@ -54,7 +90,7 @@ return {
     },
     cmd = "Telescope",
     opts = function()
-      return require("configs.telescope")
+      return require("configs.telescope_config")
     end,
     config = function(_, opts)
       local telescope = require("telescope")
