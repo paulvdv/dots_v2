@@ -1,5 +1,4 @@
 return {
-  "nvim-lua/plenary.nvim",
   {
     "catppuccin/nvim",
     lazy = false,
@@ -9,6 +8,8 @@ return {
       vim.cmd.colorscheme "catppuccin-mocha"
     end
   },
+
+  "nvim-lua/plenary.nvim",
 
   -- Formatting
   {
@@ -27,7 +28,9 @@ return {
   -- git
   {
     "tpope/vim-fugitive",
-    event = "User FilePost"
+    cmd = {
+      "Git",
+    }
   },
 
   {
@@ -39,6 +42,36 @@ return {
     config = function(_, opts)
       require("gitsigns").setup(opts)
     end
-  }
+  },
 
+  -- Telescope 
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope-ui-select.nvim",
+    },
+    cmd = "Telescope",
+    opts = function()
+      return require("configs.telescope")
+    end,
+    config = function(_, opts)
+      local telescope = require("telescope")
+      telescope.setup(opts)
+
+      local builtin = require("telescope.builtin")
+      local map = vim.keymap.set
+
+      map("n", "<C-p>", builtin.find_files, {})
+      map("n", "<leader>fg", builtin.live_grep, {})
+      map('n', '<leader>fb', builtin.buffers, {})
+      map("n", "<leader><leader>", builtin.oldfiles, {})
+
+      -- load extensions
+      for _, ext in ipairs(opts.extensions) do
+        telescope.load_extension(ext)
+      end
+    end,
+  },
 }
